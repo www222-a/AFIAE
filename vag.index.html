@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlElement">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="title">Advanced Image Analysis Engine - Forensic Tools</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vag.css">
+
+
+
+</head>
+<body>
+    <canvas id="networkBg"></canvas>
+    
+    <div class="container">
+        <div class="header header-white-bg">
+            <h1><i class="fas fa-search"></i> <span data-lang="main-title">Advanced Forensic Image Analysis Engine</span></h1>
+            <p style="color: #ffffff;" data-lang="main-subtitle">Advanced AI analysis, manipulation detection, hidden data extraction, and forensic image analysis</p>
+            <div class="ai-badge" style="color: #ffffff;">
+                <i class="fas fa-sparkles"></i> <span data-lang="ai-badge">Powered by the latest AI and forensic analysis technologies</span>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-methods">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" multiple accept="image/*" class="file-input" onchange="handleFileUpload(event)">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="upload-text" data-lang="upload-text">Drag images here for forensic analysis</div>
+                    <div class="upload-subtext">
+                        <span data-lang="upload-formats">Supports: JPG, PNG, GIF, WebP, BMP</span><br>
+                        <strong data-lang="upload-features">Advanced forensic analysis + manipulation detection</strong>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="captureFromCamera()">
+                        <i class="fas fa-camera"></i> <span data-lang="capture-camera">Capture from Camera</span>
+                    </button>
+                    <button class="quick-btn" onclick="importFromURL()">
+                        <i class="fas fa-link"></i> <span data-lang="import-url">Import from URL</span>
+                    </button>
+                    <button class="quick-btn" onclick="uploadFromDevice()">
+                        <i class="fas fa-upload"></i> <span data-lang="upload-device">Upload from Device</span>
+                    </button>
+                    <button class="quick-btn" onclick="clearAll()">
+                        <i class="fas fa-trash-alt"></i> <span data-lang="clear-all">Clear All</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="forensic-tools">
+            <h3 class="text-center mb-20"><i class="fas fa-fingerprint"></i> <span data-lang="forensic-tools-title">Forensic Image Analysis Tools</span></h3>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="runAnalysis('steganalysis')">
+                    <div class="tool-icon"><i class="fas fa-search-plus"></i></div>
+                    <h4 class="tool-title" data-lang="steganalysis-title">Steganalysis</h4>
+                    <p class="tool-desc" data-lang="steganalysis-desc">Detect hidden information in images</p>
+                    <div class="analysis-result" id="steganalysis-result"></div>
+                </div>
+                
+                <div class="tool-card" onclick="runAnalysis('ela')">
+                    <div class="tool-icon"><i class="fas fa-crop-alt"></i></div>
+                    <h4 class="tool-title" data-lang="ela-title">Error Level Analysis</h4>
+                    <p class="tool-desc" data-lang="ela-desc">Detect modified areas in images</p>
+                    <div class="analysis-result" id="ela-result"></div>
+                </div>
+                
+                <div class="tool-card" onclick="runAnalysis('metadata')">
+                    <div class="tool-icon"><i class="fas fa-info-circle"></i></div>
+                    <h4 class="tool-title" data-lang="metadata-title">Metadata Analysis</h4>
+                    <p class="tool-desc" data-lang="metadata-desc">Extract and analyze EXIF data</p>
+                    <div class="analysis-result" id="metadata-result"></div>
+                </div>
+                
+                <div class="tool-card" onclick="runAnalysis('forensic')">
+                    <div class="tool-icon"><i class="fas fa-microscope"></i></div>
+                    <h4 class="tool-title" data-lang="forensic-title">Forensic Analysis</h4>
+                    <p class="tool-desc" data-lang="forensic-desc">Noise analysis and forgery detection</p>
+                    <div class="analysis-result" id="forensic-result"></div>
+                </div>
+                
+                <div class="tool-card" onclick="runAnalysis('nsfw')">
+                    <div class="tool-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4 class="tool-title" data-lang="nsfw-title">NSFW Detection</h4>
+                    <p class="tool-desc" data-lang="nsfw-desc">Detect unsafe content</p>
+                    <div class="analysis-result" id="nsfw-result"></div>
+                </div>
+                
+                <div class="tool-card" onclick="runAnalysis('face')">
+                    <div class="tool-icon"><i class="fas fa-user-circle"></i></div>
+                    <h4 class="tool-title" data-lang="face-title">Face Detection</h4>
+                    <p class="tool-desc" data-lang="face-desc">Detect faces and analyze identity</p>
+                    <div class="analysis-result" id="face-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results">
+            <!-- Results will be populated here -->
+        </div>
+    </div>
+
+    <div class="modern-footer">
+        <div class="footer-content">
+            <p class="footer-rights" data-lang="footer-rights">© 2024 Advanced Forensic Image Analysis Engine. All rights reserved.</p>
+            <p class="footer-dev" data-lang="footer-dev">Developed by <a href="#">Developer Name</a></p>
+        </div>
+    </div>
+
+    <button class="lang-toggle-btn" id="langToggleBtn">
+        <i class="fas fa-language"></i> <span data-lang="change-language">Change Language</span>
+    </button>
+    <div class="lang-menu" id="langMenu">
+        <button class="lang-option" data-lang-code="ar">العربية</button>
+        <button class="lang-option" data-lang-code="en">English</button>
+
+    </div>
+    <script src="vag.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qr-code.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</body>
+</html>    
